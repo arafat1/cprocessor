@@ -19,7 +19,7 @@ impl Register8Bits {
             a4: 0,
             a5: 0,
             a6: 0,
-            a7: 0
+            a7: 0,
         }
     }
 

@@ -1,6 +1,6 @@
-pub mod comparator_8_bits;
-mod half_adder;
-mod full_adder;
-mod binary_adder;
 mod adder_subtractor_2s_complement;
+mod binary_adder;
+pub mod comparator_8_bits;
+mod full_adder;
+mod half_adder;
 mod multiplexer_8x1;

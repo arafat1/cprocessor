@@ -1,16 +1,13 @@
-use crate::gate::logic_gates::{xor2, and2};
+use crate::gate::logic_gates::{and2, xor2};
 
 pub struct HalfAdder {
     pub sum: u8,
-    pub carry: u8
+    pub carry: u8,
 }
 
 impl HalfAdder {
     pub fn new() -> HalfAdder {
-        HalfAdder {
-            sum: 0,
-            carry: 0
-        }
+        HalfAdder { sum: 0, carry: 0 }
     }
 
     pub fn add(&mut self, input1: u8, input2: u8) {
