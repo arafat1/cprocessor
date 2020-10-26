@@ -24,4 +24,36 @@ impl FullAdder {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn add_0_0_0() {
+        let mut full_adder = FullAdder::new();
+        full_adder.add(0, 0, 0);
+        assert_eq!(full_adder.sum, 0);
+        assert_eq!(full_adder.carry, 0);
+    }
+
+    #[test]
+    fn add_0_0_1() {
+        let mut full_adder = FullAdder::new();
+        full_adder.add(0, 0, 1);
+        assert_eq!(full_adder.sum, 1);
+        assert_eq!(full_adder.carry, 0);
+    }
+
+    #[test]
+    fn add_0_1_1() {
+        let mut full_adder = FullAdder::new();
+        full_adder.add(0, 1, 1);
+        assert_eq!(full_adder.sum, 0);
+        assert_eq!(full_adder.carry, 1);
+    }
+
+    #[test]
+    fn add_1_1_1() {
+        let mut full_adder = FullAdder::new();
+        full_adder.add(1, 1, 1);
+        assert_eq!(full_adder.sum, 1);
+        assert_eq!(full_adder.carry, 1);
+    }
 }
