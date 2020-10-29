@@ -1,9 +1,3 @@
-#[derive(Debug)]
-struct Not {
-    input: u8,
-    output: u8,
-}
-
 pub fn not(input: u8) -> u8 {
     (input + 1) & 1
 }

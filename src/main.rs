@@ -1,6 +1,6 @@
 mod circuit;
 mod gate;
-mod register;
+mod memory;
 
 pub use crate::gate::logic_gates;
 
