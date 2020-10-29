@@ -1,1 +1,1 @@
-A simple library for simulating digital circuits
+A library for simulating simple digital circuits
