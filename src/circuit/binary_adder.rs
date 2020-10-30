@@ -2,7 +2,7 @@ use crate::memory::register::Register4Bits;
 use crate::circuit::half_adder::HalfAdder;
 use crate::circuit::full_adder::FullAdder;
 
-pub fn add_4(r1: &Register4Bits, r2: &Register4Bits) -> Register4Bits {
+pub fn add4(r1: &Register4Bits, r2: &Register4Bits) -> Register4Bits {
     let mut s0 = HalfAdder::new();
     s0.add(r1.a0, r2.a0);
 

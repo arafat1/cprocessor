@@ -1,4 +1,4 @@
-mod adder_subtractor_2s_complement;
+mod adder_subtractor;
 mod binary_adder;
 pub mod comparator;
 mod full_adder;

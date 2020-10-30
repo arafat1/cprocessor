@@ -2,7 +2,7 @@ use crate::gate::logic_gates::{and8, not, xor2};
 use crate::memory::register::Register8Bits;
 
 /// Compare two 8 bit words and return 1 if they are equal else return 0
-pub fn compare_8(r1: &Register8Bits, r2: &Register8Bits) -> u8 {
+pub fn compare8(r1: &Register8Bits, r2: &Register8Bits) -> u8 {
     and8(
         not(xor2(r1.a0, r2.a0)),
         not(xor2(r1.a1, r2.a1)),
@@ -23,7 +23,7 @@ mod tests {
     fn compare_equal() {
         let r1 = Register8Bits::new();
         let r2 = Register8Bits::new();
-        assert_eq!(compare_8(&r1, &r2), 1);
+        assert_eq!(compare8(&r1, &r2), 1);
     }
 
     #[test]
@@ -31,6 +31,6 @@ mod tests {
         let mut r1 = Register8Bits::new();
         let r2 = Register8Bits::new();
         r1.change_bit1(1);
-        assert_eq!(compare_8(&r1, &r2), 0);
+        assert_eq!(compare8(&r1, &r2), 0);
     }
 }
