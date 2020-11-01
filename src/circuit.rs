@@ -1,6 +1,6 @@
-mod adder_subtractor;
-mod binary_adder;
+pub mod adder_subtractor;
+pub mod binary_adder;
 pub mod comparator;
-mod full_adder;
-mod half_adder;
-mod multiplexer;
+pub mod full_adder;
+pub mod half_adder;
+pub mod multiplexer;
