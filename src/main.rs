@@ -1,6 +1,7 @@
 mod circuit;
 mod gate;
 mod memory;
+mod clock;
 
 pub use crate::gate::logic_gates;
 
