@@ -1,6 +1,6 @@
-use crate::memory::register::Register4Bits;
-use crate::circuit::half_adder::HalfAdder;
 use crate::circuit::full_adder::FullAdder;
+use crate::circuit::half_adder::HalfAdder;
+use crate::memory::register::Register4Bits;
 
 pub fn add4(r1: &Register4Bits, r2: &Register4Bits) -> Register4Bits {
     let mut s0 = HalfAdder::new();
@@ -15,10 +15,10 @@ pub fn add4(r1: &Register4Bits, r2: &Register4Bits) -> Register4Bits {
     let mut s3 = FullAdder::new();
     s3.add(r1.a3, r2.a3, s2.carry);
 
-    Register4Bits{
+    Register4Bits {
         a0: s0.sum,
         a1: s1.sum,
         a2: s2.sum,
-        a3: s3.sum
+        a3: s3.sum,
     }
 }

@@ -2,7 +2,7 @@ pub struct Register4Bits {
     pub a0: u8,
     pub a1: u8,
     pub a2: u8,
-    pub a3: u8
+    pub a3: u8,
 }
 
 impl Register4Bits {
@@ -11,7 +11,7 @@ impl Register4Bits {
             a0: 0,
             a1: 0,
             a2: 0,
-            a3: 0
+            a3: 0,
         }
     }
 

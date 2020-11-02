@@ -1,6 +1,6 @@
-use crate::memory::register::Register4Bits;
-use crate::gate::logic_gates::xor2;
 use crate::circuit::full_adder::FullAdder;
+use crate::gate::logic_gates::xor2;
+use crate::memory::register::Register4Bits;
 
 pub fn add_sub4(r1: &Register4Bits, r2: &Register4Bits, sub: u8) -> Register4Bits {
     let in0 = xor2(r2.a0, sub);
@@ -23,6 +23,6 @@ pub fn add_sub4(r1: &Register4Bits, r2: &Register4Bits, sub: u8) -> Register4Bit
         a0: s0.sum,
         a1: s1.sum,
         a2: s2.sum,
-        a3: s3.sum
+        a3: s3.sum,
     }
 }

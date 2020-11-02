@@ -1,13 +1,13 @@
+use std::borrow::{Borrow, BorrowMut};
 use std::sync::{mpsc, Arc, Mutex};
 use std::thread;
 use std::time::Duration;
-use std::borrow::{BorrowMut, Borrow};
 
 #[derive(Debug)]
 pub enum Edge {
     Rise,
     Fall,
-    None
+    None,
 }
 
 pub struct Clock {
@@ -15,7 +15,7 @@ pub struct Clock {
     edge: Arc<Mutex<Edge>>,
     stop: Arc<Mutex<bool>>,
     edge_ct: u64, //edge change time; in millisecond; should be << period
-    period: u64, // in millisecond
+    period: u64,  // in millisecond
 }
 
 impl Clock {
@@ -43,33 +43,36 @@ impl Clock {
         let level = Arc::clone(&self.level);
         let edge = Arc::clone(&self.edge);
         let stop = Arc::clone(&self.stop);
-        let edge_ct= self.edge_ct;
+        let edge_ct = self.edge_ct;
         let period = self.period;
 
         thread::spawn(move || {
             loop {
-                {   // break if stop is true
+                {
+                    // break if stop is true
                     let status = stop.lock().unwrap();
                     if *status {
-                       break;
+                        break;
                     }
                 }
-                { // change edge to up or down
+                {
+                    // change edge to up or down
                     let mut edge = edge.lock().unwrap();
                     let mut level = level.lock().unwrap();
                     if *level == 0 {
                         *edge = Edge::Rise;
-                    }
-                    else {
+                    } else {
                         *edge = Edge::Fall;
                     }
                 }
                 thread::sleep(Duration::from_millis(edge_ct));
-                {   // after edge transition, change edge to none
+                {
+                    // after edge transition, change edge to none
                     let mut edge = edge.lock().unwrap();
                     *edge = Edge::None;
                 }
-                {   // change level to 0 or 1
+                {
+                    // change level to 0 or 1
                     let mut level = level.lock().unwrap();
                     *level = (*level + 1) & 1;
                 }
