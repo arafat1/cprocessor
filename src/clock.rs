@@ -56,6 +56,7 @@ impl Clock {
                 drop(status);
 
                 // change edge to rise or fall
+                // FIXME: Deadlock prone
                 let mut edge = c_edge.lock().unwrap();
                 let mut level = c_level.lock().unwrap();
                 if *level == 0 {

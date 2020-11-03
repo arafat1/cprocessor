@@ -40,6 +40,26 @@ impl SRNandLatch {
 }
 
 #[derive(Debug, PartialEq)]
+pub struct DNandLatch {
+    q: u8,
+    cq: u8,
+}
+
+impl DNandLatch {
+    pub fn new() -> DNandLatch {
+        DNandLatch { q: 0, cq: 1 }
+    }
+
+    pub fn input(&mut self, d: u8) {
+        let cd = 1 ^ d;
+        self.q = nand2(cd, self.cq);
+        self.cq = nand2(d, self.q);
+        // to ensure new cq is reflected
+        self.q = nand2(cd, self.cq);
+    }
+}
+
+#[derive(Debug, PartialEq)]
 pub struct LevelClockedNandLatch {
     q: u8,
     cq: u8,
@@ -50,7 +70,38 @@ impl LevelClockedNandLatch {
         LevelClockedNandLatch { q: 0, cq: 1 }
     }
 
-    pub fn input(&mut self, r: u8, s: u8, clk: u8) {}
+    pub fn input(&mut self, r: u8, s: u8, clk: u8) {
+        let cr = nand2(s, clk);
+        let cs = nand2(r, clk);
+
+        let mut sr_latch = SRNandLatch::new();
+        sr_latch.input(cr, cs);
+
+        self.q = sr_latch.q;
+        self.cq = sr_latch.cq;
+    }
+}
+
+#[derive(Debug, PartialEq)]
+pub struct LevelClockedDNandLatch {
+    q: u8,
+    cq: u8,
+}
+
+impl LevelClockedDNandLatch {
+    pub fn new() -> LevelClockedDNandLatch {
+        LevelClockedDNandLatch { q: 0, cq: 1 }
+    }
+
+    pub fn input(&mut self, d: u8, clk: u8) {
+        let cd = 1 ^ d;
+
+        let mut lcn_latch = LevelClockedNandLatch::new();
+        lcn_latch.input(d, cd, clk);
+
+        self.q = lcn_latch.q;
+        self.cq = lcn_latch.cq;
+    }
 }
 
 #[cfg(test)]
