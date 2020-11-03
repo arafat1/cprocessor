@@ -31,14 +31,13 @@ impl Clock {
 
     pub fn start(&mut self) {
         // reset before each start
-        {
-            let mut edge = self.edge.lock().unwrap();
-            *edge = Edge::None;
-        }
-        {
-            let mut level = self.level.lock().unwrap();
-            *level = 0;
-        }
+        let mut edge = self.edge.lock().unwrap();
+        *edge = Edge::None;
+        drop(edge);
+
+        let mut level = self.level.lock().unwrap();
+        *level = 0;
+        drop(level);
 
         let c_level = Arc::clone(&self.level);
         let c_edge = Arc::clone(&self.edge);
